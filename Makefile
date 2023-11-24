@@ -29,3 +29,11 @@ start:
 	@sudo systemctl start mariadb.service
 	@echo "Starting the application..."
 	@cd src && flask --env-file ../.env run 
+
+stop:
+	@echo "Stopping Mosquitto..."
+	@sudo systemctl stop mosquitto.service
+	@echo "Stopping MariaDB..."
+	@sudo systemctl stop mariadb.service
+	@echo "Stopping the application..."
+	@sudo pkill -f flask
