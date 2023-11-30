@@ -1,23 +1,17 @@
-from graphql_server.flask import GraphQLView
+from multiprocessing import Process, Queue
 
-from api import app, db
-from api.type import event_schema, pet_schema
-
-
-app.add_url_rule(
-    "/graphql/events",
-    view_func=GraphQLView.as_view("events", schema=event_schema, graphiql=True),
-)
-app.add_url_rule(
-    "/graphql/pets",
-    view_func=GraphQLView.as_view("pets", schema=pet_schema, graphiql=True),
-)
+from api.model_run import inference_worker
 
 
 def main():
-    print("Creating database...")
-    with app.app_context():
-        db.create_all()
+    # inference_worker_process = Process(target=inference_worker)
+    # inference_worker_process.start()
+
+    # start flask app
+    from api import app
+
+    app.run(host="petmonitor", port=5000, debug=True)
+    # inference_worker_process.join()
 
 
 if __name__ == "__main__":

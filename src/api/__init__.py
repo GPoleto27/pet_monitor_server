@@ -1,22 +1,49 @@
-from flask import Flask, request, send_file, send_from_directory
+import logging
+from os.path import join as path_join
+
+from flask import Flask, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
 
-import os
+from .models import engine
+from .query import (
+    create_pet,
+    get_pet,
+    get_pets,
+    update_pet,
+    delete_pet,
+    create_event,
+    get_event,
+    get_events,
+    update_event,
+    get_latest_pet_data,
+)
+from .model_run import add_to_inference_queue, run_inference
 
-UPLOAD_FOLDER = "/home/petmonitor/petmonitor-main/images"
+
+UPLOAD_FOLDER = "/images"
 ALLOWED_EXTENSIONS = {"png"}
 
 app = Flask(__name__)
 CORS(app)
 
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = "mysql://root:monitorpet@localhost:3306/petmonitor"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# Create a session
+Session = sessionmaker()
+Session.configure(bind=engine)
+session = Session()
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler("/logs/app.log")
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+import requests
+
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-db = SQLAlchemy(app)
 
 
 def allowed_file(filename):
@@ -26,35 +53,93 @@ def allowed_file(filename):
 @app.route("/image", methods=["GET", "POST"])
 def upload_file():
     if request.method == "POST":
-        # check if the post request has the file part
-        if "file" not in request.files:
-            return "No file part"
-        file = request.files["file"]
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == "":
-            return "No selected file"
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-            return "File uploaded successfully"
-    return """
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    """
+        # get file name in a variable
+        filename = request.args.get("filename")
+        # receive a jpeg image
+        image = request.data
+        # save the image
+        filename = secure_filename(filename)
+        with open(path_join(app.config["UPLOAD_FOLDER"], filename), "wb") as f:
+            f.write(image)
+        # run inference
+        predictions = run_inference(path_join(app.config["UPLOAD_FOLDER"], filename))
+
+        update_event(filename, int(predictions))
+
+        # update the event with the prediction
+        event.pet_id = int(predictions)
+        session.commit()
+
+        # send the prediction to the frontend
+        return str(predictions), 200
+    return "OK", 200
 
 
-@app.route("/download/<image_id>")
-def download_file(image_id):
-    return send_file(
-        os.path.join(app.config["UPLOAD_FOLDER"], f"{image_id}.png"),
-        as_attachment=True,
-    )
+# params: prediction
+@app.route("/prediction", methods=["GET"])
+def prediction():
+    prediction = request.args.get("prediction")
+    return prediction, 200
+
+
+@app.route("/pet", methods=["GET", "POST"])
+def pet():
+    if request.method == "POST":
+        name = request.form["name"]
+        age = request.form["age"]
+        weight = request.form["weight"]
+        image = request.form["image"]
+        pet_id = create_pet(name, age, weight, image)
+        return str(pet_id), 201
+    else:
+        pet_id = request.args.get("id")
+        if pet_id:
+            pet = get_pet(pet_id)
+            return pet
+        else:
+            pets = get_latest_pet_data()
+            return pets
+
+
+@app.route("/pet/<pet_id>", methods=["DELETE"])
+def pet_id(pet_id):
+    delete_pet(pet_id)
+    return "Pet deleted successfully"
+
+
+@app.route("/event", methods=["GET", "POST"])
+def event():
+    if request.method == "POST":
+        event_type = request.form["type"]
+        weight = request.form["weight"]
+        timestamp = request.form["timestamp"]
+        image = request.form["image"]
+        event_id = create_event(event_type, weight, timestamp, image)
+        return str(event_id), 201
+    else:
+        pet_id = request.args.get("pet_id")
+        if pet_id:
+            events = get_events(pet_id)
+            return events, 200
+        else:
+            event_id = request.args.get("id")
+            if event_id:
+                event = get_event(event_id)
+                return event, 200
+            else:
+                events = get_events()
+                return events, 200
+        return "WTF", 400
+
+
+@app.route("/event/<event_id>", methods=["PUT"])
+def event_id(event_id):
+    pet_id = request.form["pet_id"]
+    event_type = request.form["type"]
+    weight = request.form["weight"]
+    timestamp = request.form["timestamp"]
+    event_id = create_event(pet_id, event_type, weight, timestamp)
+    return "Event updated successfully"
 
 
 @app.route("/")

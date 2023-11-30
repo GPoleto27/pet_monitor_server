@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  petmonitor:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./src:/app/src
+      - ./model.h5:/models/model.h5
+      - ./images:/images:rw
+      - ./database:/database:rw
+    command: sh -c "cd /app/src; python3 app.py"
+
+networks:
+  default:
+    name: pet-monitor-network
