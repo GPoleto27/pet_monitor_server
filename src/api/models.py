@@ -52,7 +52,7 @@ class Event(Base):
     type = Column(Integer, nullable=False)
     weight = Column(Float, nullable=False)
     timestamp = Column(Integer, nullable=False)
-    image = Column(String(50), nullable=False)
+    image = Column(String(50), nullable=False, index=True)
 
     def __repr__(self):
         return "<Event(pet_id='%s', type='%s', timestamp='%s')>" % (

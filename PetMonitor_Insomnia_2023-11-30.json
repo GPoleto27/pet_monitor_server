@@ -1,0 +1,366 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-11-30T06:13:07.810Z",
+  "__export_source": "insomnia.desktop.app:v8.4.5",
+  "resources": [
+    {
+      "_id": "req_3b8bb04b18f24b2391f8e38c3647b860",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701323852012,
+      "created": 1701319052290,
+      "url": "http://localhost:5000/pet",
+      "name": "Create pet",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "id": "pair_0c8028fe6e304332aae268c199132d78",
+            "name": "name",
+            "value": "batima",
+            "description": ""
+          },
+          {
+            "id": "pair_c4242f722c444dd9bb8126b1b1f652f6",
+            "name": "age",
+            "value": "1",
+            "description": ""
+          },
+          {
+            "id": "pair_de446dc1236c49fea184673e37a2970d",
+            "name": "weight",
+            "value": "2500",
+            "description": ""
+          },
+          {
+            "id": "pair_8cb88d70e351465dbde1b23c06bef287",
+            "name": "image",
+            "value": "batima1.jpg",
+            "description": ""
+          }
+        ]
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        },
+        { "name": "User-Agent", "value": "insomnia/8.4.5" }
+      ],
+      "authentication": {},
+      "metaSortKey": -1701316514262,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_scratchpad",
+      "parentId": null,
+      "modified": 1701313233621,
+      "created": 1701313233621,
+      "name": "Scratch Pad",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_a014268013ef452db5d95fe4a3a788a0",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701322822139,
+      "created": 1701316514162,
+      "url": "http://localhost:5000/event",
+      "name": "Create event",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "id": "pair_c4242f722c444dd9bb8126b1b1f652f6",
+            "name": "type",
+            "value": "1",
+            "description": ""
+          },
+          {
+            "id": "pair_de446dc1236c49fea184673e37a2970d",
+            "name": "weight",
+            "value": "250",
+            "description": ""
+          },
+          {
+            "id": "pair_8cb88d70e351465dbde1b23c06bef287",
+            "name": "timestamp",
+            "value": "1701318358",
+            "description": ""
+          },
+          {
+            "id": "pair_68de9ee744dc4078af99c7d6dfc385ac",
+            "name": "image",
+            "value": "batima1.jpg",
+            "description": ""
+          }
+        ]
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        },
+        { "name": "User-Agent", "value": "insomnia/8.4.5" }
+      ],
+      "authentication": {},
+      "metaSortKey": -1701316514162,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_133a13c96a224430906cc619cab60ce4",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701320975759,
+      "created": 1701316480181,
+      "url": "http://localhost:5000/event",
+      "name": "Get events by pet",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_aebee5d336364f0294969e2a4b5d7623",
+          "name": "pet_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [{ "name": "User-Agent", "value": "insomnia/8.4.5" }],
+      "authentication": {},
+      "metaSortKey": -1701316480181,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_b283098c0c004cb2b0913c2370203538",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701320988409,
+      "created": 1701320984863,
+      "url": "http://localhost:5000/event",
+      "name": "Get events by id",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_aebee5d336364f0294969e2a4b5d7623",
+          "name": "id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [{ "name": "User-Agent", "value": "insomnia/8.4.5" }],
+      "authentication": {},
+      "metaSortKey": -1701315680206.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ac0323f683264ce5b25ea00981272bbb",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701321080927,
+      "created": 1701319138337,
+      "url": "http://localhost:5000/pet",
+      "name": "Get all pets",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [{ "name": "User-Agent", "value": "insomnia/8.4.5" }],
+      "authentication": {},
+      "metaSortKey": -1701314880232,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0206f0cee25e4a1b962e52bf534d0774",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701323139263,
+      "created": 1701313280283,
+      "url": "http://localhost:5000/image",
+      "name": "Image inference",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/octet-stream",
+        "fileName": "C:\\Users\\guilh\\OneDrive\\Desktop\\dataset\\batima\\c9f64d15-a8b8-4185-bc57-ccf038e5d531.jpg"
+      },
+      "parameters": [
+        {
+          "id": "pair_7966a626597e45c99041685b4761f1d4",
+          "name": "filename",
+          "value": "batima1.jpg",
+          "description": ""
+        }
+      ],
+      "headers": [
+        { "name": "Content-Type", "value": "image/jpeg" },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.4.5",
+          "id": "pair_d9d9d3f2cc004457a5f97d84212009a2"
+        },
+        {
+          "id": "pair_abba2a1040f44f938c56d4cd12c1fb78",
+          "name": "Content-Disposition",
+          "value": "form-data; name=\"file\"; filename=\"0cfef1c9-ab99-4178-9f72-820690eb211c.jpg\"",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1701313280283,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0ca1489b95cc45a7a7ec6dd1f3f5b9f7",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701323896970,
+      "created": 1701323884716,
+      "url": "http://localhost:5000/event",
+      "name": "Get events by pet after inference",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_aebee5d336364f0294969e2a4b5d7623",
+          "name": "pet_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [{ "name": "User-Agent", "value": "insomnia/8.4.5" }],
+      "authentication": {},
+      "metaSortKey": -1701313280183,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00195d8398194cb49637bd92ef7a7142",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701323899587,
+      "created": 1701323888901,
+      "url": "http://localhost:5000/event",
+      "name": "Get events by id after inference",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_aebee5d336364f0294969e2a4b5d7623",
+          "name": "id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [{ "name": "User-Agent", "value": "insomnia/8.4.5" }],
+      "authentication": {},
+      "metaSortKey": -1701313280083,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_462aaabfc87d4175b406b8984e7f6047",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701323904970,
+      "created": 1701323892476,
+      "url": "http://localhost:5000/pet",
+      "name": "Get all pets after inference",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [{ "name": "User-Agent", "value": "insomnia/8.4.5" }],
+      "authentication": {},
+      "metaSortKey": -1701313279983,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_99d30891da4bdcebc63947a8fc17f076de878684",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701313249768,
+      "created": 1701313249768,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1701313249768,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_99d30891da4bdcebc63947a8fc17f076de878684",
+      "parentId": "wrk_scratchpad",
+      "modified": 1701313249771,
+      "created": 1701313249771,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    }
+  ]
+}
