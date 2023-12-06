@@ -7,7 +7,7 @@ from .query import get_event_by_image
 
 image_queue = Queue()
 
-model = tf.keras.models.load_model("/models/model.h5")
+model = tf.keras.models.load_model("C:\\Users\\a823374\\pet_monitor_server\\model.h5")
 
 
 def run_inference(image: str) -> int:

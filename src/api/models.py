@@ -12,7 +12,10 @@ from sqlalchemy import create_engine
 
 # SQLAlchemy ORM
 Base = declarative_base()
-engine = create_engine("sqlite:////database/petmonitor.db", echo=True)
+engine = create_engine(
+    "sqlite:///C:\\Users\\a823374\\pet_monitor_server\\database\\petmonitor.db",
+    echo=True,
+)
 
 
 class EventType(Enum):

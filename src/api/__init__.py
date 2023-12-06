@@ -1,4 +1,3 @@
-import logging
 from os.path import join as path_join
 
 from flask import Flask, request
@@ -33,13 +32,6 @@ CORS(app)
 Session = sessionmaker()
 Session.configure(bind=engine)
 session = Session()
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler("/logs/app.log")
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-handler.setFormatter(formatter)
-logger.addHandler(handler)
 
 import requests
 

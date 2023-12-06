@@ -10,7 +10,7 @@ def main():
     # start flask app
     from api import app
 
-    app.run(host="petmonitor", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
     # inference_worker_process.join()
 
 
