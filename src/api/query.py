@@ -89,7 +89,8 @@ def get_events(pet: int) -> List[Event]:
 
 def update_event(image: str, pet_id: int) -> None:
     event = get_event_by_image(image)
-    event.pet_id = pet_id
+    pet = get_pet(pet_id)
+    event.pet_id = pet.get("id", 0)
     session.commit()
 
 

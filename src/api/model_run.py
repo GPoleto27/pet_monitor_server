@@ -23,9 +23,9 @@ def run_inference(image: str) -> tuple:
     predictions = model.predict(img_array)
     prediction = np.argmax(predictions[0])
 
-    pet_id = prediction + 1
+    pet_id = int(prediction + 1)
 
-    pet = get_pet(int(pet_id))
+    pet = get_pet(pet_id)
 
     return pet_id, pet.get("name", f"Unknown: {pet_id}")
 
