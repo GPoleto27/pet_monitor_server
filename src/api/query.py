@@ -2,11 +2,13 @@ from typing import List
 
 from .models import Pet, Event, engine
 from typing import List
-from .models import Pet, Event, engine
+from .models import Pet, Event, engine, populate_pets
 from sqlalchemy.orm import sessionmaker
 
 Session = sessionmaker(bind=engine)
 session = Session()
+
+populate_pets()
 
 
 def create_pet(name: str, age: int, weight: float, image: str) -> int:
@@ -62,6 +64,8 @@ def create_event(event_type: int, weight: float, timestamp: int, image: str) -> 
 
 def get_event(event_id: int) -> Event:
     event = session.query(Event).filter_by(id=event_id).first()
+    if event is None:
+        print(event_id)
     e = event.__dict__
     del e["_sa_instance_state"]
     return e

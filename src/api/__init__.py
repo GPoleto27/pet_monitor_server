@@ -22,7 +22,7 @@ from .query import (
 from .model_run import add_to_inference_queue, run_inference
 
 
-UPLOAD_FOLDER = "/images"
+UPLOAD_FOLDER = "C:\\Users\\guilh\\pet_monitor_server\\images"
 ALLOWED_EXTENSIONS = {"png"}
 
 app = Flask(__name__)
@@ -54,16 +54,14 @@ def upload_file():
         with open(path_join(app.config["UPLOAD_FOLDER"], filename), "wb") as f:
             f.write(image)
         # run inference
-        predictions = run_inference(path_join(app.config["UPLOAD_FOLDER"], filename))
+        pet_id, pet_name = run_inference(
+            path_join(app.config["UPLOAD_FOLDER"], filename)
+        )
 
-        update_event(filename, int(predictions))
-
-        # update the event with the prediction
-        event.pet_id = int(predictions)
-        session.commit()
+        update_event(filename, pet_id)
 
         # send the prediction to the frontend
-        return str(predictions), 200
+        return str(pet_name), 200
     return "OK", 200
 
 
